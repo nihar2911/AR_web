@@ -29,7 +29,7 @@
         up</button>
 
       <!-- sign-in -->
-      <div class="modal fade" id="login" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -60,7 +60,7 @@
                   </div>
                 </div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" id="login">Login</button>
+                <button class="btn btn-primary" type="submit" id="login" data-dismiss="model">Login</button>
               </form>
               <div class="alert" *ngIf="serverErrorMessages">
                 {{serverErrorMessages}}

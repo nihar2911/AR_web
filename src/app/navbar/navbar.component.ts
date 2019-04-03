@@ -32,11 +32,9 @@ export class NavbarComponent implements OnInit {
 
   }
 
-
+// Register User
   onSubmit(form: NgForm) {
     console.log("SignUP", form.value);
-    // var _login = document.getElementById('login');
-    //     _login.setAttribute("data-dismiss", "modal");
     this.userService.postUser(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
@@ -69,8 +67,12 @@ export class NavbarComponent implements OnInit {
 
   signIn(signInForm : NgForm){
     console.log("SignIn", signInForm.value);
+    
     this.userService.login(signInForm.value).subscribe(
       res => {
+    //     console.log("in res");
+    //     var _login = document.getElementById('login');
+    // _login.setAttribute("data-dismiss", "modal");
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/userprofile');
       },
