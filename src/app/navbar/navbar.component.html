@@ -1,0 +1,200 @@
+<!-- Nav-bar for login -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="!(this.userService.loggedIn)">
+  <a class="navbar-brand" routerLink="/home">Devta Tech</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/what-we-do">What we do</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/pricing">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" >
+      <button class="btn btn btn-dark my-2 my-sm-0" type="button" data-toggle="modal"
+        data-target="#login">Login</button> &nbsp;
+      <button class="btn btn btn-dark my-2 my-sm-0" type="button" data-toggle="modal" data-target="#signUp">Sign
+        up</button>
+
+      <!-- sign-in -->
+      <div class="modal fade" id="login" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && signIn(signInForm)">
+                <div class="form-group">
+                  <label for="loginID" class="col-form-label">Email</label>
+                  <input name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email"
+                    [pattern]="emailRegex" required
+                    [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">
+                  <div *ngIf="signInForm.submitted && email.errors?.pattern">
+                    <label class="validation-message">Invalid email address.</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-form-label">Password</label>
+                  <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password"
+                    placeholder="Password" required minlength="4"
+                    [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }">
+                  <div *ngIf="signInForm.submitted && password.errors?.minlength">
+                    <label class="validation-message">Minimum 4 characters.</label>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="submit" id="login">Login</button>
+              </form>
+              <div class="alert" *ngIf="serverErrorMessages">
+                {{serverErrorMessages}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Sign up -->
+      <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Name</label>
+                  <input type="text" #name="ngModel" [(ngModel)]="userService.selectedUser.name" name="name" required
+                    [ngClass]="{'invalid-textbox' :signUpForm.submitted && !name.valid }" class="form-control fullWidth"
+                    id="name" placeholder="Company Name or individual Name">
+                  <div *ngIf="signUpForm.submitted && !name.valid">
+                    <label class="validation-message">This field is required.</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="col-form-label">Email</label>
+                  <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" required
+                    [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }"
+                    class="form-control fullWidth" id="email" placeholder="ex: xyz@abc.com">
+                  <div *ngIf="signUpForm.submitted && email.errors">
+                    <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+                    <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone" class="col-form-label">Phone</label>
+                  <input type="text" #phone="ngModel" [(ngModel)]="userService.selectedUser.phone" name="phone" required
+                    [pattern]="phoneRegex" [ngClass]="{'invalid-textbox' :signUpForm.submitted && !phone.valid }"
+                    class="form-control fullWidth" id="phone" placeholder="10 Digit number">
+                  <div *ngIf="signUpForm.submitted && phone.errors">
+                    <label *ngIf="phone.errors.required" class="validation-message">This field is required.</label>
+                    <label *ngIf="phone.errors.pattern" class="validation-message">Invalid Phone Number.</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="col-form-label">Password</label>
+                  <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password"
+                    name="password" placeholder="Password" minlength="4" required
+                    [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }"
+                    class="form-control fullWidth">
+                  <div *ngIf="signUpForm.submitted && password.errors">
+                    <label *ngIf="password.errors.required" class="validation-message">This field is required.</label>
+                    <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4
+                      characters.</label>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <label for="password_2" class="col-form-label">Confirm Password</label>
+                  <input type="password" #password_2="ngModel" [(ngModel)]="userService.selectedUser.password_2"
+                    name="password" placeholder="Password" minlength="4" required
+                    [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password_2.valid }"
+                    class="form-control fullWidth" id="password_2" class="form-control fullWidth" id="password_2">
+                  <div *ngIf="signUpForm.submitted && password_1.errors">
+                    <label *ngIf="password_2.errors.required" class="validation-message">This field is required.</label>
+                    <label *ngIf="password_2.errors.minlength" class="validation-message">Enter atleast 4
+                      characters.</label>
+                  </div>
+                </div> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" value="Sign Up" >SignUp</button>
+              </form>
+              <!-- Success message -->
+              <div class="success" *ngIf="showSucessMessage">
+                Saved successfully
+              </div>
+
+              <!-- Error message -->
+              <div class="alert" *ngIf="serverErrorMessages">
+                {{serverErrorMessages}}
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" value="Sign Up">SignUp</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</nav>
+
+<!-- Nav-bar after login -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="(this.userService.loggedIn)">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Publish New</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
