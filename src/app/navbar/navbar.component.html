@@ -1,6 +1,6 @@
 <!-- Nav-bar for login -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="!(this.userService.loggedIn)">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="!(this.userService.loggedIN())">
   <a class="navbar-brand" routerLink="/home">Devta Tech</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/home">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/what-we-do">What we do</a>
@@ -45,7 +45,7 @@
                   <label for="loginID" class="col-form-label">Email</label>
                   <input name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email"
                     [pattern]="emailRegex" required
-                    [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">
+                    [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }" autofocus>
                   <div *ngIf="signInForm.submitted && email.errors?.pattern">
                     <label class="validation-message">Invalid email address.</label>
                   </div>
@@ -163,7 +163,7 @@
 </nav>
 
 <!-- Nav-bar after login -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="(this.userService.loggedIn)">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="(this.userService.loggedIN())">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -175,10 +175,10 @@
         <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Publish New</a>
+        <a class="nav-link" href="/userprofile/#" >Publish New</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
+        <a class="nav-link" href="/userprofile/#">Contact Us</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -192,9 +192,7 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{this.userService.sendUserName()}}</button>
   </div>
 </nav>

@@ -4,6 +4,9 @@ import { environment } from '../../environments/environment';
 
 import { User } from './user.model';
 import { logging } from 'protractor';
+import { UserDashboardComponent } from '../user-dashboard/user-dashboard.component';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +18,19 @@ export class UserService {
     phone: '',
     password: ''
   };
-
-  loggedIn = false; 
+userName;
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
   constructor(private http: HttpClient) { }
 
-  postUser(user: User){
-    return this.http.post(environment.apiBaseUrl+'/register', user);
+  postUser(user: User) {
+    return this.http.post(environment.apiBaseUrl + '/register', user);
   }
 
-  
-  login(authCredentials) {
- 
-    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials,this.noAuthHeader);
+
+  login(authCredentials: any) {
+    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials, this.noAuthHeader);
   }
 
   getUserProfile() {
@@ -38,7 +39,6 @@ export class UserService {
 
   setToken(token: string) {
     localStorage.setItem('token', token);
-    this.loggedIn = true;
   }
 
   getToken() {
@@ -47,7 +47,6 @@ export class UserService {
 
   deleteToken() {
     localStorage.removeItem('token');
-    this.loggedIn = false;
   }
 
   getUserPayload() {
@@ -60,7 +59,13 @@ export class UserService {
     else
       return null;
   }
-
+  loggedIN() {
+    var token = this.getToken();
+    if (token == null)
+      return false;
+    else
+      return true;
+  }
 
   isLoggedIn() {
     var userPayload = this.getUserPayload();
@@ -70,4 +75,12 @@ export class UserService {
       return false;
   }
 
+  getUserName(userName) {
+    this.userName = userName;
+  }
+
+  sendUserName() {
+    console.log(this.userName);
+    return this.userName;
+  }
 }

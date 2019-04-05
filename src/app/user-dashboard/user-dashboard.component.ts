@@ -5,7 +5,8 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.css'],
+  providers: [UserService]
 })
 export class UserDashboardComponent implements OnInit {
   userDetails;
@@ -15,17 +16,19 @@ export class UserDashboardComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       res => {
         this.userDetails = res['user'];
+        this.userService.getUserName(this.userDetails.name);
       },
       err => { 
         console.log(err);
         
       }
     );
+  
   }
 
   onLogout(){
     this.userService.deleteToken();
-    console.log('login',this.userService.loggedIn);
+    // console.log('login',this.userService.loggedIn);
     this.router.navigate(['']);
   }
 
