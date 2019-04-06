@@ -1,3 +1,15 @@
 .fullWidth{
     width: 100%;
 }
+
+.paddingTenPx{
+    padding: 10px;
+}
+
+.loginBox{
+    max-width: 286px;
+}
+
+.margin25px{
+    margin: 0px 20px;
+}

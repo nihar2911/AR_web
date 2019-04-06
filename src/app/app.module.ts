@@ -20,6 +20,7 @@ import { UserService } from './shared/user.service';
 //other 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { UserNavbarComponent } from './user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     PricingComponent,
     LandingPageComponent,
     ContactUsComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    UserNavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@
         <a class="nav-link" href="#">Contact Us</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" >
+    <form class="form-inline my-2 my-lg-0">
       <button class="btn btn btn-dark my-2 my-sm-0" type="button" data-toggle="modal"
         data-target="#login">Login</button> &nbsp;
       <button class="btn btn btn-dark my-2 my-sm-0" type="button" data-toggle="modal" data-target="#signUp">Sign
@@ -31,7 +31,7 @@
       <!-- sign-in -->
       <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog loginBox" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Login</h5>
@@ -39,7 +39,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body margin25px">
               <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && signIn(signInForm)">
                 <div class="form-group">
                   <label for="loginID" class="col-form-label">Email</label>
@@ -59,8 +59,10 @@
                     <label class="validation-message">Minimum 4 characters.</label>
                   </div>
                 </div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" id="login" data-dismiss="model">Login</button>
+                <div class="float-right paddingTenPx">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;
+                  <button class="btn btn-primary" type="submit" id="login" data-dismiss="model">Login</button>
+                </div>
               </form>
               <div class="alert" *ngIf="serverErrorMessages">
                 {{serverErrorMessages}}
@@ -125,20 +127,10 @@
                       characters.</label>
                   </div>
                 </div>
-                <!-- <div class="form-group">
-                  <label for="password_2" class="col-form-label">Confirm Password</label>
-                  <input type="password" #password_2="ngModel" [(ngModel)]="userService.selectedUser.password_2"
-                    name="password" placeholder="Password" minlength="4" required
-                    [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password_2.valid }"
-                    class="form-control fullWidth" id="password_2" class="form-control fullWidth" id="password_2">
-                  <div *ngIf="signUpForm.submitted && password_1.errors">
-                    <label *ngIf="password_2.errors.required" class="validation-message">This field is required.</label>
-                    <label *ngIf="password_2.errors.minlength" class="validation-message">Enter atleast 4
-                      characters.</label>
-                  </div>
-                </div> -->
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" value="Sign Up" >SignUp</button>
+                <div class="float-right paddingTenPx">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;
+                  <button type="submit" class="btn btn-primary" value="Sign Up">SignUp</button>
+                </div>
               </form>
               <!-- Success message -->
               <div class="success" *ngIf="showSucessMessage">
@@ -159,40 +151,5 @@
       </div>
 
     </form>
-  </div>
-</nav>
-
-<!-- Nav-bar after login -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="(this.userService.loggedIN())">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/userprofile/#" >Publish New</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/userprofile/#">Contact Us</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{this.userService.sendUserName()}}</button>
   </div>
 </nav>

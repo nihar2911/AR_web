@@ -19,18 +19,16 @@ export class UserDashboardComponent implements OnInit {
         this.userService.getUserName(this.userDetails.name);
       },
       err => { 
-        console.log(err);
-        
+        console.log(err);       
       }
     );
   
   }
-
   onLogout(){
     this.userService.deleteToken();
     // console.log('login',this.userService.loggedIn);
     this.router.navigate(['']);
   }
-
+  
 
 }

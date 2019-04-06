@@ -3,14 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 import { User } from './user.model';
-import { logging } from 'protractor';
-import { UserDashboardComponent } from '../user-dashboard/user-dashboard.component';
+import { Subject, Observable } from 'rxjs';
+import { NavbarComponent } from '../navbar/navbar.component'
 
 
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class UserService {
   selectedUser: User = {
     name: '',
@@ -18,7 +21,8 @@ export class UserService {
     phone: '',
     password: ''
   };
-userName;
+  private subject = new Subject<any>();
+
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
@@ -75,12 +79,13 @@ userName;
       return false;
   }
 
-  getUserName(userName) {
-    this.userName = userName;
+  getUserName(user: string) {
+   this.subject.next({text: user});
+   
+   console.log("loggedIn", this.subject.asObservable());
   }
 
-  sendUserName() {
-    console.log(this.userName);
-    return this.userName;
+  sendUserName():Observable<any> {
+   return this.subject.asObservable();
   }
-}
+} 

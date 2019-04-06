@@ -29,11 +29,11 @@ export class NavbarComponent implements OnInit {
   serverErrorMessages: string;
 
   ngOnInit() {
-    if (this.userService.isLoggedIn())
+    if (this.userService.isLoggedIn()){
       this.router.navigateByUrl('/userprofile');
-
+      console.log('OnInIT called');
+    }
   }
-
 
   // Register User
   onSubmit(form: NgForm) {
@@ -70,13 +70,10 @@ export class NavbarComponent implements OnInit {
 
     this.userService.login(signInForm.value).subscribe(
       res => {
-        //     console.log("in res");
-
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/userprofile');
         $('#login').modal('hide');
-
-        console.log('name', this.userService.sendUserName());
+        //document.getElementById('userProfile').innerHTML = this.userService.sendUserName();
       },
       err => {
         this.serverErrorMessages = err.error.message;
