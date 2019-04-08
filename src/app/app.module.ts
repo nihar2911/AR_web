@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 //import { HttpClientModule } from '@angular/common/http';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -21,6 +22,7 @@ import { UserService } from './shared/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserNavbarComponent } from './user-navbar/user-navbar.component';
+import { PublishNewComponent } from './publish-new/publish-new.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { UserNavbarComponent } from './user-navbar/user-navbar.component';
     LandingPageComponent,
     ContactUsComponent,
     UserDashboardComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
+    PublishNewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
