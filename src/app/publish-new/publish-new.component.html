@@ -1,0 +1,59 @@
+<app-user-navbar></app-user-navbar>
+<form #publishContent="ngForm" (ngSubmit)="signInForm.valid && publishNewContent(publishContent)">
+  <div class="container">
+    <div class="row border height200 border">
+      <div class="input-group mb-3">
+        <div class="custom-file form-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".png, .jpg, .jpeg, .gif"
+            (change)="onSelectFile($event);">
+          <label class="custom-file-label bor" for="inputGroupFile01" placeholder="Add Target Image">
+            Target Image
+          </label>
+        </div>
+      </div>
+      <div class="col-10 col-md-10" *ngIf="this.urlTarget != null">
+        <img [src]="urlTarget" height="115">
+      </div>
+      <div class="col-2 col-md-2" *ngIf="this.urlTarget != null">
+        <button type="button" class="btn btn-outline-warning" (click)=deleteImg()>clear</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container border">
+    <div class="row">
+      <div class="col-6 col-md-4"></div>
+      <div class="col-6 col-md-4">
+        <h4>Select Content Type</h4>
+      </div>
+      <div class="col-6 col-md-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-4"></div>
+      <div class="col-6 col-md-4">
+        <div class="input-group mb-3 form-group">
+          <select class="custom-select" id="ContentType">
+            <option value="video">Video</option>
+            <option value="3D">3D</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6 col-md-4"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="input-group mb-3 ">
+        <div class="custom-file form-group">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" accept=".mp4, .avi, .mpg, .mpeg, .wmv">
+          <label class="custom-file-label bor" for="inputGroupFile01" placeholder="Add Target Image">
+            Content file
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

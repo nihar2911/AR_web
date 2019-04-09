@@ -1,0 +1,32 @@
+<!-- Nav-bar after login -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/userprofile">Dashboard<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/userprofile/publish">Publish New</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/userprofile">Contact Us</a>
+      </li>
+    </ul>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" *ngIf="this.userInitalized">{{this.userDetails["name"]}}</button>
+      <div class="dropdown-menu rightZero" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Profile</a>
+        <a class="dropdown-item" href="#">Setting</a>
+        <a class="dropdown-item" href="#" (click)="onLogout()">Loggout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
