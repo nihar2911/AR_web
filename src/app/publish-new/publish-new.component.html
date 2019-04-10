@@ -1,4 +1,5 @@
 <app-user-navbar></app-user-navbar>
+
 <form #publishContent="ngForm" (ngSubmit)="signInForm.valid && publishNewContent(publishContent)">
   <div class="container">
     <div class="row border height200 border">
@@ -11,10 +12,10 @@
           </label>
         </div>
       </div>
-      <div class="col-10 col-md-10" *ngIf="this.urlTarget != null">
+      <div class="col-md-10 col-sm-10" *ngIf="this.urlTarget != null">
         <img [src]="urlTarget" height="115">
       </div>
-      <div class="col-2 col-md-2" *ngIf="this.urlTarget != null">
+      <div class="col-md-2 col-sm-2" *ngIf="this.urlTarget != null">
         <button type="button" class="btn btn-outline-warning" (click)=deleteImg()>clear</button>
       </div>
     </div>
@@ -23,15 +24,13 @@
 
   <div class="container border">
     <div class="row">
-      <div class="col-6 col-md-4"></div>
-      <div class="col-6 col-md-4">
+      <div class="col-6 col-md-4 col-sm-4">
         <h4>Select Content Type</h4>
       </div>
-      <div class="col-6 col-md-4"></div>
+      <div class="col-6 col-md-4 col-sm-4"></div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-4"></div>
-      <div class="col-6 col-md-4">
+      <div class="col-6 col-md-4 col-sm-4">
         <div class="input-group mb-3 form-group">
           <select class="custom-select" id="ContentType">
             <option value="video">Video</option>
@@ -39,7 +38,7 @@
           </select>
         </div>
       </div>
-      <div class="col-6 col-md-4"></div>
+      <div class="col-6 col-md-4 col-sm-4"></div>
     </div>
   </div>
 
@@ -54,6 +53,35 @@
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="row">
+      <div class="col-6">
+        <label for="startDate">Start Date</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="startDate" ngbDatepicker
+            #s="ngbDatepicker" id="startDate">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="s.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <label for="endDate">End Date</label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker
+            #e="ngbDatepicker" id="endDate">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="e.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+  <div class="container">
+    <div class="row float-xl-right">
+      <button type="button fa-pull-right" class="btn btn-primary">Upload</button>&nbsp;
+      <button type="button" class="btn btn-secondary">Clear</button>
+    </div>
+  </div>
 </form>

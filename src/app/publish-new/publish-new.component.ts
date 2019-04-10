@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 
 @Component({
@@ -8,8 +9,12 @@ declare var $: any;
 })
 export class PublishNewComponent implements OnInit {
   urlTarget: any;
+  startDate;
+  endDate;
 
-  constructor() { }
+  constructor(private calendar: NgbCalendar) {
+
+   }
 
   ngOnInit() {
   }
@@ -32,4 +37,5 @@ export class PublishNewComponent implements OnInit {
     this.urlTarget = null;
   }
 
+ 
 }
